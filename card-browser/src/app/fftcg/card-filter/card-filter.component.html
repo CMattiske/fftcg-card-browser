@@ -17,11 +17,11 @@
     </div>
     <!-- Category -->
     <div>
-        <app-filter-string-array property="category" (change)="onChangeCategories($event)"></app-filter-string-array>
+        <app-filter-string-array property="category" [options]="categoryOptions" (change)="onChangeCategories($event)"></app-filter-string-array>
     </div>
     <!-- Job -->
     <div>
-        <app-filter-string-array property="job" (change)="onChangeJobs($event)"></app-filter-string-array>
+        <app-filter-string-array property="job" [options]="jobOptions" (change)="onChangeJobs($event)"></app-filter-string-array>
     </div>
     <!-- Text -->
     <div>
@@ -33,7 +33,7 @@
     </div>
     <!-- Set -->
     <div>
-        <app-filter-string-array property="set" (change)="onChangeSet($event)"></app-filter-string-array>
+        <app-filter-string-array property="set" [options]="setOptions" (change)="onChangeSet($event)"></app-filter-string-array>
     </div>
     <!-- Rarity -->
     <div>

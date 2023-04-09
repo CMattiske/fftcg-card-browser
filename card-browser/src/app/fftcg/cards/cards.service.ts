@@ -61,7 +61,7 @@ export class CardsService {
     );
   }
 
-  private static Sets(cards$: Observable<Card[]>): Observable<string[]> {
+  static Sets(cards$: Observable<Card[]>): Observable<string[]> {
     return cards$.pipe(
       map((cards: Card[]) => {
         const set: Set<string> = new Set<string>();
@@ -71,7 +71,7 @@ export class CardsService {
     );
   }
 
-  private static Tags(cards$: Observable<Card[]>): Observable<string[]> {
+  static Tags(cards$: Observable<Card[]>): Observable<string[]> {
     return cards$.pipe(
       map((cards: Card[]) => {
         const set: Set<string> = new Set<string>();

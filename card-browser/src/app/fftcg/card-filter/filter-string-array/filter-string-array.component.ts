@@ -60,6 +60,7 @@ class StringArrayFilter implements Filter {
 })
 export class FilterStringArrayComponent implements OnInit {
   @Input() property!: StringProperty;
+  @Input() options: string[] = [];
 
   @Output() change: EventEmitter<Filter> = new EventEmitter<Filter>();
 
@@ -88,21 +89,6 @@ export class FilterStringArrayComponent implements OnInit {
   protected set stringArray(value: string[]) {
     this.myStringArrayFilter.stringArray = value;
     this.change.emit(this.myStringArrayFilter);
-  }
-
-  protected get options$(): Observable<string[]> {
-    switch (this.property)
-    {
-      case 'category':
-        return this.cardsService.allCategories$;
-      case 'job':
-        return this.cardsService.allJobs$;
-      case 'set':
-        return this.cardsService.allSetNames$;
-      case 'tags':
-        // :MYTODO:
-        return of([]);
-    }
   }
 
   ngOnInit(): void {

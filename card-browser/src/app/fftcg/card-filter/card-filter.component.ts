@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 import { Filter } from './filter';
 import { Predicates } from 'src/app/shared/predicates';
@@ -10,6 +10,11 @@ import { Predicates } from 'src/app/shared/predicates';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardFilterComponent {
+  @Input() categoryOptions: string[] = [];
+  @Input() jobOptions: string[] = [];
+  @Input() setOptions: string[] = [];
+  @Input() tagOptions: string[] = [];
+
   @Output() change: EventEmitter<Filter[]> = new EventEmitter<Filter[]>();
 
   private myNameFilter: Filter | undefined;
