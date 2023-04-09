@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-
 import { Card } from '../../cards/card';
 import { Filter } from '../filter';
 import { CardsService } from '../../cards/cards.service';
