@@ -3,4 +3,8 @@
     flex-flow: column nowrap;
 
     gap: 8px;
+
+    mat-divider {
+        margin-bottom: 8px;
+    }
 }
