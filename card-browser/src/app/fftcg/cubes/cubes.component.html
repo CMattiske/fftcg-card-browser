@@ -1,0 +1,11 @@
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Cube</mat-label>
+        <mat-select [(value)]="cube">
+            <mat-option *ngFor="let cube of cubes$ | async | nullToEmpty" [value]="cube">
+            {{cube.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<app-cube-editor [cube]="cube"></app-cube-editor>

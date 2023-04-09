@@ -1,0 +1,6 @@
+<div>
+    <h4><b>{{(cube?.cards ?? []).length}}</b> cards</h4>
+</div>
+<div *ngFor="let cubeCard of cube?.cards ?? []">
+    {{(card$(cubeCard) | async)?.name}}
+</div>

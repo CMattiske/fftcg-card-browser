@@ -39,6 +39,11 @@ export class CardsService {
     shareReplay(1),
   );
 
+  setIDToCard$: Observable<Map<string, Card>> = this.allCards$.pipe(
+    map(cards => new Map<string, Card>(cards.map(card => [card.setID, card]))),
+    shareReplay(1),
+  );
+
   constructor(private loggingService: LoggingService, private backendService: BackendService) { }
 
   static Categories(cards$: Observable<Card[]>): Observable<string[]> {
@@ -86,6 +91,7 @@ export class CardsService {
     switch (rawCard.type) {
       case ECardType.FORWARD:
         return Card.Forward(
+          rawCard.id,
           rawCard.name,
           rawCard.elements.map(CardsService.Element),
           rawCard.cost,
@@ -103,6 +109,7 @@ export class CardsService {
         );
       case ECardType.BACKUP:
         return Card.Backup(
+          rawCard.id,
           rawCard.name,
           rawCard.elements.map(CardsService.Element),
           rawCard.cost,
@@ -120,6 +127,7 @@ export class CardsService {
         );
       case ECardType.SUMMON:
         return Card.Summon(
+          rawCard.id,
           rawCard.name,
           rawCard.elements.map(CardsService.Element),
           rawCard.cost,
@@ -134,6 +142,7 @@ export class CardsService {
         );
       case ECardType.MONSTER:
         return Card.Monster(
+          rawCard.id,
           rawCard.name,
           rawCard.elements.map(CardsService.Element),
           rawCard.cost,

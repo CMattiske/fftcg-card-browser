@@ -6,6 +6,8 @@ import { CardElement } from "./card-element";
 
 export class Card
 {
+    private myID: number | undefined;
+
     private myName!: string;
     private myType!: CardType;
     private myElements!: CardElement[];
@@ -26,6 +28,7 @@ export class Card
     private isMulticard: boolean | undefined;
 
     constructor(
+        id: number | undefined,
         name: string,
         type: CardType,
         elements: CardElement[],
@@ -43,6 +46,7 @@ export class Card
         multicard: boolean | undefined,
     )
     {
+        this.myID = id;
         this.myName = name;
         this.myType = type;
         this.myElements = elements;
@@ -61,6 +65,7 @@ export class Card
     }
     
     static Forward(
+        id: number | undefined,
         name: string,
         elements: CardElement[],
         cost: number,
@@ -78,6 +83,7 @@ export class Card
     ): Card
     {
         return new Card(
+            id,
             name,
             CardType.FORWARD,
             elements,
@@ -97,6 +103,7 @@ export class Card
     }
 
     static Backup(
+        id: number | undefined,
         name: string,
         elements: CardElement[],
         cost: number,
@@ -114,6 +121,7 @@ export class Card
     ): Card
     {
         return new Card(
+            id,
             name,
             CardType.BACKUP,
             elements,
@@ -133,6 +141,7 @@ export class Card
     }
 
     static Summon(
+        id: number | undefined,
         name: string,
         elements: CardElement[],
         cost: number,
@@ -147,6 +156,7 @@ export class Card
     ): Card
     {
         return new Card(
+            id,
             name,
             CardType.SUMMON,
             elements,
@@ -166,6 +176,7 @@ export class Card
     }
     
     static Monster(
+        id: number | undefined,
         name: string,
         elements: CardElement[],
         cost: number,
@@ -183,6 +194,7 @@ export class Card
     ): Card
     {
         return new Card(
+            id,
             name,
             CardType.MONSTER,
             elements,
@@ -199,6 +211,11 @@ export class Card
             power,
             multicard,
         );
+    }
+
+    get id(): number | undefined
+    {
+        return this.myID;
     }
 
     get name(): string

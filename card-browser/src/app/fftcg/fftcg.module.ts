@@ -26,6 +26,8 @@ import { FilterTypeComponent } from './card-filter/filter-type/filter-type.compo
 import { FilterStringArrayComponent } from './card-filter/filter-string-array/filter-string-array.component';
 import { SharedModule } from '../shared/shared.module';
 import { FilterRarityComponent } from './card-filter/filter-rarity/filter-rarity.component';
+import { CubeEditorComponent } from './cube-editor/cube-editor.component';
+import { CubesComponent } from './cubes/cubes.component';
 
 @NgModule({
   declarations: [
@@ -41,13 +43,16 @@ import { FilterRarityComponent } from './card-filter/filter-rarity/filter-rarity
     FilterTextComponent,
     FilterTypeComponent,
     FilterStringArrayComponent,
-    FilterRarityComponent
+    FilterRarityComponent,
+    CubeEditorComponent,
+    CubesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule.forChild([
       { path: 'cards', component: CardBrowserComponent},
+      { path: 'cubes', component: CubesComponent},
       // { path: 'cards/:id', component: CardDetailsComponent},
     ]),
 
