@@ -1,0 +1,42 @@
+<div class="container">
+    <!-- Name -->
+    <div>
+        <app-filter-name (change)="onChangeName($event)"></app-filter-name>
+    </div>
+    <!-- Type -->
+    <div>
+        <app-filter-type (change)="onChangeType($event)"></app-filter-type>
+    </div>
+    <!-- Element -->
+    <div>
+        <app-filter-elements (change)="onChangeElements($event)"></app-filter-elements>
+    </div>
+    <!-- Cost -->
+    <div>
+        <app-filter-cost (change)="onChangeCost($event)"></app-filter-cost>
+    </div>
+    <!-- Category -->
+    <div>
+        <app-filter-string-array property="category" (change)="onChangeCategories($event)"></app-filter-string-array>
+    </div>
+    <!-- Job -->
+    <div>
+        <app-filter-string-array property="job" (change)="onChangeJobs($event)"></app-filter-string-array>
+    </div>
+    <!-- Text -->
+    <div>
+        <app-filter-text (change)="onChangeText($event)"></app-filter-text>
+    </div>
+    <!-- Power -->
+    <div>
+        <app-filter-power (change)="onChangePower($event)"></app-filter-power>
+    </div>
+    <!-- Set -->
+    <div>
+        <app-filter-string-array property="set" (change)="onChangeSet($event)"></app-filter-string-array>
+    </div>
+    <!-- Rarity -->
+    <div>
+        <app-filter-rarity (change)="onChangeRarity($event)"></app-filter-rarity>
+    </div>
+</div>

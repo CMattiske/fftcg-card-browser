@@ -1,0 +1,7 @@
+<div class="container">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [(ngModel)]='nameFragment'/>
+    </mat-form-field>
+    <mat-checkbox [disabled]="!nameFragment" [(ngModel)]="exact">Exact</mat-checkbox>
+</div>

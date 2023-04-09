@@ -1,0 +1,11 @@
+<div class="container">
+    <div>
+        <app-card-filter (change)="onFiltersChanged($event)"></app-card-filter>
+    </div>
+    <div>
+        <h4>Displaying <b>{{(filteredCards$ | async | nullToEmpty).length}}</b> results</h4>
+    </div>
+    <div>
+        <app-card-gallery [cards]="filteredCards$ | async | nullToEmpty"></app-card-gallery>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="flex-row-wrap">
+    <mat-form-field appearance="fill">
+        <mat-label>{{label}}</mat-label>
+        <mat-select [(value)]="stringArray" multiple>
+            <mat-option *ngFor="let str of options$ | async | nullToEmpty" [value]="str">
+            {{str}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

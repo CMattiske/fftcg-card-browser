@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <mat-icon>star</mat-icon>
+    <span>FFTCG</span>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/cards'">Card Browser</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,3 @@
+<mat-button-toggle-group name="filterTypes" [(ngModel)]='types' aria-label="Filter Types" multiple>
+    <mat-button-toggle *ngFor="let cardType of [TypeEnum.FORWARD, TypeEnum.BACKUP, TypeEnum.SUMMON, TypeEnum.MONSTER]" [value]="cardType">{{cardType}}</mat-button-toggle>
+</mat-button-toggle-group>

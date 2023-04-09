@@ -1,0 +1,7 @@
+<mat-button-toggle-group name="filterElements" [(ngModel)]='elements' aria-label="Filter Elements" multiple>
+    <mat-button-toggle *ngFor="let element of [ElementEnum.FIRE, ElementEnum.ICE, ElementEnum.WIND, ElementEnum.EARTH, ElementEnum.LIGHTNING, ElementEnum.WATER, ElementEnum.LIGHT, ElementEnum.DARK]" [value]="element">
+        <span class="mat-button-toggle-label-content">
+            <img [src]='elementImage(element)' [style.height.px]='32'>
+        </span>
+    </mat-button-toggle>
+</mat-button-toggle-group>

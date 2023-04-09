@@ -1,0 +1,3 @@
+<mat-button-toggle-group name="filterRarities" [(ngModel)]='rarities' aria-label="Filter Rarities" multiple>
+    <mat-button-toggle *ngFor="let rarity of [RarityEnum.COMMON, RarityEnum.RARE, RarityEnum.HERO, RarityEnum.LEGEND, RarityEnum.STARTER, RarityEnum.PROMO, RarityEnum.BOSS]" [value]="rarity">{{rarity}}</mat-button-toggle>
+</mat-button-toggle-group>

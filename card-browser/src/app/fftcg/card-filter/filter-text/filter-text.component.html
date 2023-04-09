@@ -1,0 +1,22 @@
+<div class="flex-row-wrap">
+    <mat-form-field class="text-fragment-list" appearance="fill">
+        <mat-label>Text</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter text fragment">
+        <mat-chip-row *ngFor="let textFragment of textFragments"
+                        (removed)="onRemove(textFragment)"
+                        [editable]="true"
+                        (edited)="onEdit(textFragment, $event)">
+            {{textFragment}}
+            <button matChipRemove [attr.aria-label]="'remove ' + textFragment">
+            <mat-icon>cancel</mat-icon>
+            </button>
+        </mat-chip-row>
+        <input placeholder="Enter some text..."
+                [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="onAdd($event)"/>
+        </mat-chip-grid>
+    </mat-form-field>
+    <mat-checkbox [disabled]="textFragments.length < 2" [(ngModel)]="all">All</mat-checkbox>
+</div>
