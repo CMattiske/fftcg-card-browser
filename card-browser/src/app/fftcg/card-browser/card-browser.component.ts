@@ -16,11 +16,11 @@ import { CubesService } from '../cubes/cubes.service';
 export class CardBrowserComponent implements OnInit {
 
   protected cards$: BehaviorSubject<Card[]> = new BehaviorSubject<Card[]>([]);
+
   protected categoryOptions$: Observable<string[]> = CardsService.Categories(this.cards$);
   protected jobOptions$: Observable<string[]> = CardsService.Jobs(this.cards$);
   protected setOptions$: Observable<string[]> = CardsService.Sets(this.cards$);
   protected tagOptions$: Observable<string[]> = CardsService.Tags(this.cards$);
-
   protected filters$: BehaviorSubject<Filter[]> = new BehaviorSubject<Filter[]>([]);
   protected filteredCards$: BehaviorSubject<Card[]> = new BehaviorSubject<Card[]>([]);
 

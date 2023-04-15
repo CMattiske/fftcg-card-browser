@@ -1,9 +1,10 @@
 <div class="image-gallery">
     <ng-container *ngFor="let card of cards">
         <div fxFlexFill class="image-gallery-item" (click)="onClick(card)">
-            <a [routerLink]="['/card', card.setID]">
+            <!-- <a [routerLink]="['/card', card.setID]"> -->
                 <img [src]='cardImage(card)'
-                 [title]='card.name'></a>
+                 [title]='card.name'>
+            <!-- </a> -->
         </div>
     </ng-container>
 </div>

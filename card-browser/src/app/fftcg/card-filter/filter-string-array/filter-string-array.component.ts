@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { Card } from '../../cards/card';
 import { Filter } from '../filter';
-import { CardsService } from '../../cards/cards.service';
 
 export type StringProperty = 'category' | 'job' | 'set' | 'tags';
 
@@ -64,7 +63,7 @@ export class FilterStringArrayComponent implements OnInit {
 
   private myStringArrayFilter: StringArrayFilter = new StringArrayFilter(this.property);
 
-  constructor(private cardsService: CardsService) {}
+  constructor() {}
 
   protected get label(): string {
     switch (this.property)

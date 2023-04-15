@@ -1,6 +1,18 @@
 <div>
-    <h4><b>{{(cube?.cards ?? []).length}}</b> cards</h4>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [(ngModel)]='cubeName'/>
+    </mat-form-field>
 </div>
-<div *ngFor="let cubeCard of cube?.cards ?? []">
-    {{(card$(cubeCard) | async)?.name}}
+<div>
+    <app-card-filter
+        [categoryOptions]="categoryOptions$ | async | nullToEmpty"
+        [jobOptions]="jobOptions$ | async | nullToEmpty"
+        [setOptions]="setOptions$ | async | nullToEmpty"
+        [tagOptions]="tagOptions$ | async | nullToEmpty"
+        (change)="onFiltersChanged($event)"></app-card-filter>
+</div>
+<h4>Displaying <b>{{(filteredCards$ | async | nullToEmpty).length}}</b> of <b>{{(cube?.cards ?? []).length}}</b> cards</h4>
+<div *ngFor="let card of filteredCards$ | async | nullToEmpty">
+    {{card.name}}
 </div>

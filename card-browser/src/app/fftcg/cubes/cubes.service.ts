@@ -24,6 +24,6 @@ export class CubesService {
   ) { }
 
   private static Cube(rawCube: ICube): Cube {
-    return new Cube(rawCube.name, rawCube.cards.map(card => new CubeCard(card.setID, card.rank)));
+    return new Cube(rawCube.id, rawCube.name, rawCube.cards.map(card => new CubeCard(card.setID, card.rank)));
   }
 }

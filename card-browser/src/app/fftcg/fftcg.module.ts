@@ -52,7 +52,11 @@ import { CubesComponent } from './cubes/cubes.component';
     FormsModule,
     RouterModule.forChild([
       { path: 'cards', component: CardBrowserComponent},
-      { path: 'cubes', component: CubesComponent},
+      {
+        path: 'cubes',
+        component: CubesComponent,
+        canDeactivate: [(component: CubesComponent) => component.pendingCubes.length === 0],
+      },
       // { path: 'cards/:id', component: CardDetailsComponent},
     ]),
 
