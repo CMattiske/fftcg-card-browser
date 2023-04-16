@@ -1,0 +1,12 @@
+.top-container {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.all-container {
+    overflow-y: scroll;
+    max-height: 800px;
+
+    border-radius: 1px;
+    border-style: solid;
+}

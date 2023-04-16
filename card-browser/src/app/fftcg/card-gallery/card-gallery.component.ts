@@ -12,6 +12,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
 })
 export class CardGalleryComponent {
   @Input() cards: Card[] = [];
+  @Input() fadedCards: Set<Card> = new Set<Card>();
 
   @Output() cardClick: EventEmitter<Card> = new EventEmitter<Card>();
 
@@ -20,6 +21,10 @@ export class CardGalleryComponent {
 
   protected cardImage(card: Card): string {
     return this.imagesService.cardImage(card);
+  }
+
+  protected isFaded(card: Card): boolean {
+    return this.fadedCards.has(card);
   }
 
   protected onClick(card: Card): void {

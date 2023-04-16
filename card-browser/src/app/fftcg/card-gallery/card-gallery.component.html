@@ -3,6 +3,7 @@
         <div fxFlexFill class="image-gallery-item" (click)="onClick(card)">
             <!-- <a [routerLink]="['/card', card.setID]"> -->
                 <img [src]='cardImage(card)'
+                 [style]="isFaded(card) ? 'opacity: 0.2;' : ''"
                  [title]='card.name'>
             <!-- </a> -->
         </div>

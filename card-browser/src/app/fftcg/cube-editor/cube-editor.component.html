@@ -4,15 +4,25 @@
         <input matInput type="text" [(ngModel)]='cubeName'/>
     </mat-form-field>
 </div>
-<div>
-    <app-card-filter
-        [categoryOptions]="categoryOptions$ | async | nullToEmpty"
-        [jobOptions]="jobOptions$ | async | nullToEmpty"
-        [setOptions]="setOptions$ | async | nullToEmpty"
-        [tagOptions]="tagOptions$ | async | nullToEmpty"
-        (change)="onFiltersChanged($event)"></app-card-filter>
+<div class="top-container">
+    <div>
+        <app-card-filter
+            [categoryOptions]="categoryOptions$ | async | nullToEmpty"
+            [jobOptions]="jobOptions$ | async | nullToEmpty"
+            [setOptions]="setOptions$ | async | nullToEmpty"
+            [tagOptions]="tagOptions$ | async | nullToEmpty"
+            (change)="onFiltersChanged($event)"></app-card-filter>
+        </div>
+    <div class="all-container">
+        <app-card-gallery
+            [cards]='filteredAllCards$ | async | nullToEmpty'
+            [fadedCards]='fadedCards$ | async | nullToEmptySet'
+            (cardClick)="onAllCardClick($event)">
+        </app-card-gallery>
+    </div>
 </div>
 <h4>Displaying <b>{{(filteredCards$ | async | nullToEmpty).length}}</b> of <b>{{(cube?.cards ?? []).length}}</b> cards</h4>
-<div *ngFor="let card of filteredCards$ | async | nullToEmpty">
-    {{card.name}}
-</div>
+<app-card-gallery
+    [cards]='filteredCards$ | async | nullToEmpty'
+    (cardClick)="onCubeCardClick($event)">
+</app-card-gallery>

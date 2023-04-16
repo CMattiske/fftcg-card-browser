@@ -1,3 +1,4 @@
+import { Card } from "../cards/card";
 import { CubeCard } from "./cube-card";
 
 export class Cube {
@@ -22,5 +23,13 @@ export class Cube {
 
     get cards(): CubeCard[] {
         return this.myCards;
+    }
+
+    removeCard(card: Card): boolean {
+        const index = this.myCards.findIndex(cubeCard => cubeCard.setID === card.setID);
+        if (index == null) return false;
+
+        this.myCards.splice(index, 1);
+        return true;
     }
 }

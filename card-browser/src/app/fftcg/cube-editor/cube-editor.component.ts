@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
-import { Observable, map, BehaviorSubject, combineLatest } from 'rxjs';
+import { Observable, map, BehaviorSubject, combineLatest, Subject } from 'rxjs';
 
 import { CardsService } from '../cards/cards.service';
 import { Cube } from '../cubes/cube';
@@ -26,6 +26,11 @@ export class CubeEditorComponent implements OnInit, OnChanges {
   protected filters$: BehaviorSubject<Filter[]> = new BehaviorSubject<Filter[]>([]);
   protected filteredCards$: BehaviorSubject<Card[]> = new BehaviorSubject<Card[]>([]);
 
+  protected filteredAllCards$: BehaviorSubject<Card[]> = new BehaviorSubject<Card[]>([]);
+  protected fadedCards$: BehaviorSubject<Set<Card>> = new BehaviorSubject<Set<Card>>(new Set<Card>());
+
+  private cube$!: BehaviorSubject<Cube | undefined>;
+
   constructor(
     private cardsService: CardsService,
   )
@@ -44,7 +49,28 @@ export class CubeEditorComponent implements OnInit, OnChanges {
     this.filters$.next(filters);
   }
 
+  protected onAllCardClick(card: Card): void {
+    this.cube?.cards.push(new CubeCard(card.setID, 8));
+    this.cube$.next(this.cube);
+  }
+
+  protected onCubeCardClick(card: Card): void {
+    this.cube?.removeCard(card);
+    this.cube$.next(this.cube);
+  }
+
   ngOnInit(): void {
+    this.cube$ = new BehaviorSubject<Cube | undefined>(this.cube);
+    combineLatest([this.cube$, this.cardsService.setIDToCard$]).pipe(
+      map(([cube, setIDToCard]: [Cube | undefined, Map<string, Card>]) => {
+        if (!cube) return [];
+
+          return cube.cards
+          .map((cubeCard: CubeCard) => setIDToCard.get(cubeCard.setID))
+          .filter(Predicates.Defined);
+      }),
+    ).subscribe(this.cards$);
+
     combineLatest([this.cards$, this.filters$]).pipe(
       map(([cards, filters]: [Card[], Filter[]]) => {
         return cards.filter(card => {
@@ -52,19 +78,23 @@ export class CubeEditorComponent implements OnInit, OnChanges {
         })
       })
     ).subscribe(this.filteredCards$);
+
+    combineLatest([this.cardsService.allCards$, this.filters$]).pipe(
+      map(([cards, filters]: [Card[], Filter[]]) => {
+        return cards.filter(card => {
+          return filters.every(filter => filter.satisfies(card));
+        })
+      })
+    ).subscribe(this.filteredAllCards$);
+
+    this.cards$.pipe(
+      map((cards: Card[]): Set<Card> => new Set<Card>(cards)),
+    ).subscribe(this.fadedCards$);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['cube']) {
-      this.cardsService.setIDToCard$.pipe(
-        map(setIDToCard => {
-          if (!this.cube) return [];
-
-          return this.cube?.cards
-          .map((cubeCard: CubeCard) => setIDToCard.get(cubeCard.setID))
-          .filter(Predicates.Defined);
-        }),
-      ).subscribe(this.cards$);
+      this.cube$.next(this.cube);
     }
   }
 }
