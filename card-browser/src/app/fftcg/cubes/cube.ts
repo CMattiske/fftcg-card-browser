@@ -13,6 +13,10 @@ export class Cube {
         this.myCards = cards;
     }
 
+    get id(): number | undefined {
+        return this.myID;
+    }
+    
     get name(): string {
         return this.myName;
     }

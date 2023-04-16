@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, tap, catchError, switchMap, shareReplay } from 'rxjs';
+import { BehaviorSubject, Observable, tap, map, catchError, switchMap, shareReplay } from 'rxjs';
 
 import { ICard } from './resources/card';
 import { ICube } from './resources/cube';
@@ -26,8 +26,10 @@ export class BackendService {
       body: data,
       responseType: responseType || 'json',
       observe: 'body',
-      headers: {
+      headers: method === 'get' ? {
         // Authorization: `Bearer ${token}`,
+      } : {
+        'Content-Type': 'application/json',
       },
     });
   }
@@ -44,6 +46,14 @@ export class BackendService {
     );
   }
 
+  createCard(card: ICard): Observable<ICard> {
+    return this.request('post', `${this.myJSONServerURL}/cards`, JSON.stringify(card));
+  }
+
+  saveCard(card: ICard): Observable<ICard> {
+    return this.request('put', `${this.myJSONServerURL}/cards/${card.id}`, JSON.stringify(card));
+  }
+
   getAllCubes(): Observable<ICube[]> {
     return this.myRefreshCubesSubject.pipe(
       switchMap(() =>this.request<ICube[]>('get', `${this.myJSONServerURL}/cubes`)),
@@ -54,5 +64,17 @@ export class BackendService {
       tap(data => this.loggingService.log(`Retrieved ${data.length} cubes`)),
       shareReplay(1),
     );
+  }
+
+  createCube(cube: ICube): Observable<ICube> {
+    return this.request('post', `${this.myJSONServerURL}/cubes`, JSON.stringify(cube));
+  }
+
+  saveCube(cube: ICube): Observable<ICube> {
+    return this.request('put', `${this.myJSONServerURL}/cubes/${cube.id}`, JSON.stringify(cube));
+  }
+
+  deleteCube(cubeID: number): Observable<boolean> {
+    return this.request('delete', `${this.myJSONServerURL}/cubes/${cubeID}`).pipe(map(() => true));
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoggingService } from 'src/app/logging.service';
 import { BackendService } from '../backend/backend.service';
-import { ICube } from '../backend/resources/cube';
+import { ICube, ICubeCard } from '../backend/resources/cube';
 import { Observable, map, shareReplay } from 'rxjs';
 import { Cube } from './cube';
 import { CubeCard } from './cube-card';
@@ -25,5 +25,18 @@ export class CubesService {
 
   private static Cube(rawCube: ICube): Cube {
     return new Cube(rawCube.id, rawCube.name, rawCube.cards.map(card => new CubeCard(card.setID, card.rank)));
+  }
+
+  public static ICube(cube: Cube): ICube {
+    return {
+      id: cube.id,
+      name: cube.name,
+      cards: cube.cards.map(cubeCard => {
+        return {
+          setID: cubeCard.setID,
+          rank: cubeCard.rank
+        } as ICubeCard;
+      }),
+    } as ICube;
   }
 }

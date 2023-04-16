@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
-import { Observable, map, BehaviorSubject, combineLatest, Subject } from 'rxjs';
+import { Observable, map, BehaviorSubject, combineLatest, catchError } from 'rxjs';
 
 import { CardsService } from '../cards/cards.service';
 import { Cube } from '../cubes/cube';
@@ -8,6 +8,9 @@ import { CubeCard } from '../cubes/cube-card';
 import { Card } from '../cards/card';
 import { Predicates } from 'src/app/shared/predicates';
 import { Filter } from '../card-filter/filter';
+import { BackendService } from '../backend/backend.service';
+import { CubesService } from '../cubes/cubes.service';
+import { LoggingService } from 'src/app/logging.service';
 
 @Component({
   selector: 'app-cube-editor',
@@ -32,6 +35,8 @@ export class CubeEditorComponent implements OnInit, OnChanges {
   private cube$!: BehaviorSubject<Cube | undefined>;
 
   constructor(
+    private loggingService: LoggingService,
+    private backendService: BackendService,
     private cardsService: CardsService,
   )
   {}
@@ -42,6 +47,29 @@ export class CubeEditorComponent implements OnInit, OnChanges {
 
   protected set cubeName(value: string) {
     if (this.cube) this.cube.name = value;
+  }
+
+  protected onClickSave(): void {
+    if (this.cube) {
+      if (this.cube.id == null) {
+        this.loggingService.log(`Saving new cube: ${this.cube.name}`);
+        this.backendService.createCube(CubesService.ICube(this.cube)).pipe(
+          catchError(err => {
+            this.loggingService.error(err.message);
+            throw(err);
+          }),
+        ).subscribe(() => this.loggingService.log('Cube saved!'));
+      }
+      else {
+        this.loggingService.log(`Saving existing cube: ${this.cube.name}`);
+        this.backendService.saveCube(CubesService.ICube(this.cube)).pipe(
+          catchError(err => {
+            this.loggingService.error(err.message);
+            throw(err);
+          }),
+        ).subscribe(() => this.loggingService.log('Cube saved!'));
+      }
+    }
   }
 
   protected onFiltersChanged(filters: Filter[]): void
@@ -93,7 +121,7 @@ export class CubeEditorComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['cube']) {
+    if (changes['cube'] && this.cube$) {
       this.cube$.next(this.cube);
     }
   }
