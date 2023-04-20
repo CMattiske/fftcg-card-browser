@@ -51,7 +51,7 @@ export class CardsService {
       map((cards: Card[]) => {
         const set: Set<string> = new Set<string>();
         cards.forEach(card => card.categories.forEach(category => set.add(category)));
-        return [...set];
+        return [...set].sort();
       }),
     );
   }
@@ -61,7 +61,7 @@ export class CardsService {
       map((cards: Card[]) => {
         const set: Set<string> = new Set<string>();
         cards.forEach(card => (card.jobs ?? []).forEach(job => set.add(job)));
-        return [...set];
+        return [...set].sort();
       }),
     );
   }
@@ -71,7 +71,7 @@ export class CardsService {
       map((cards: Card[]) => {
         const set: Set<string> = new Set<string>();
         cards.forEach(card => set.add(card.set.name));
-        return [...set];
+        return [...set].sort();
       }),
     );
   }
@@ -81,7 +81,7 @@ export class CardsService {
       map((cards: Card[]) => {
         const set: Set<string> = new Set<string>();
         cards.forEach(card => card.tags.forEach(tag => set.add(tag)));
-        return [...set];
+        return [...set].sort();
       }),
     );
   }

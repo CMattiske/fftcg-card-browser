@@ -10,6 +10,7 @@ export class CardSet
     {
         this.myAbbreviation = abbreviation;
         this.myName = name;
+        this.myOrder = order;
         this.myCount = count;
         this.myTitle = title;
     }
@@ -60,6 +61,11 @@ export class CardSets
 
     static NameToSet: Map<string, CardSet> = CardSets.CoreSets.concat(CardSets.OtherSets).reduce(
         (map: Map<string, CardSet>, set: CardSet) => map.set(set.name, set),
+        new Map(),
+    )
+
+    static AbbreviationToSet: Map<string, CardSet> = CardSets.CoreSets.concat(CardSets.OtherSets).reduce(
+        (map: Map<string, CardSet>, set: CardSet) => map.set(set.abbreviation, set),
         new Map(),
     )
 

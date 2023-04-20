@@ -4,6 +4,9 @@
         <input matInput type="text" [(ngModel)]='cubeName'/>
     </mat-form-field>
     <button mat-raised-button (click)="onClickSave()">Save</button>
+    <div>
+        <app-cube-breakdown [breakdown]="breakdown$ | async"></app-cube-breakdown>
+    </div>
 </div>
 <div class="top-container">
     <div>
@@ -13,7 +16,15 @@
             [setOptions]="setOptions$ | async | nullToEmpty"
             [tagOptions]="tagOptions$ | async | nullToEmpty"
             (change)="onFiltersChanged($event)"></app-card-filter>
-        </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Sort by</mat-label>
+            <mat-select [(value)]="sortBy">
+                <mat-option value="id">ID</mat-option>
+                <mat-option value="element">Element</mat-option>
+                <mat-option value="type">Card type</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
     <div class="all-container">
         <app-card-gallery
             [cards]='filteredAllCards$ | async | nullToEmpty'
@@ -22,7 +33,7 @@
         </app-card-gallery>
     </div>
 </div>
-<h4>Displaying <b>{{(filteredCards$ | async | nullToEmpty).length}}</b> of <b>{{(cube?.cards ?? []).length}}</b> cards</h4>
+<h4>Displaying <b>{{(filteredCards$ | async | nullToEmpty).length}}</b> of <b>{{(cards$ | async | nullToEmpty).length}}</b> cards</h4>
 <app-card-gallery
     [cards]='filteredCards$ | async | nullToEmpty'
     (cardClick)="onCubeCardClick($event)">

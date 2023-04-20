@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
@@ -28,6 +29,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FilterRarityComponent } from './card-filter/filter-rarity/filter-rarity.component';
 import { CubeEditorComponent } from './cube-editor/cube-editor.component';
 import { CubesComponent } from './cubes/cubes.component';
+import { CubeBreakdownComponent } from './cube-breakdown/cube-breakdown.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { CubesComponent } from './cubes/cubes.component';
     FilterStringArrayComponent,
     FilterRarityComponent,
     CubeEditorComponent,
-    CubesComponent
+    CubesComponent,
+    CubeBreakdownComponent
   ],
   imports: [
     CommonModule,
@@ -60,6 +63,7 @@ import { CubesComponent } from './cubes/cubes.component';
       // { path: 'cards/:id', component: CardDetailsComponent},
     ]),
 
+    MatButtonModule,
     MatButtonToggleModule,
     MatCheckboxModule,
     MatChipsModule,

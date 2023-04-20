@@ -19,6 +19,7 @@ export class CardFilterComponent {
 
   private myNameFilter: Filter | undefined;
   private myTypeFilter: Filter | undefined;
+  private myFlagsFilter: Filter | undefined;
   private myElementFilter: Filter | undefined;
   private myCostFilter: Filter | undefined;
   private myCategoryFilter: Filter | undefined;
@@ -37,6 +38,12 @@ export class CardFilterComponent {
   protected onChangeType(filter: Filter): void
   {
     this.myTypeFilter = filter.isRelevant ? filter : undefined;
+    this.onFiltersChanged();
+  }
+
+  protected onChangeFlags(filter: Filter): void
+  {
+    this.myFlagsFilter = filter.isRelevant ? filter : undefined;
     this.onFiltersChanged();
   }
 
@@ -93,6 +100,7 @@ export class CardFilterComponent {
     this.change.emit([
       this.myNameFilter,
       this.myTypeFilter,
+      this.myFlagsFilter,
       this.myElementFilter,
       this.myCostFilter,
       this.myCategoryFilter,

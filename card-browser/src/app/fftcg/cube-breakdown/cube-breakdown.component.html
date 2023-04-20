@@ -1,0 +1,9 @@
+<div *ngIf="breakdown">
+    {{breakdown.totalCount}}
+    <div *ngFor="let element of [ElementEnum.FIRE, ElementEnum.ICE, ElementEnum.WIND, ElementEnum.EARTH, ElementEnum.LIGHTNING, ElementEnum.WATER, ElementEnum.LIGHT, ElementEnum.DARK]">
+        {{element}}: {{breakdown.elementToBreakdown.get(element)?.totalCount}} (
+        <ng-container *ngFor="let cardType of [TypeEnum.FORWARD, TypeEnum.BACKUP, TypeEnum.SUMMON, TypeEnum.MONSTER]">
+            {{breakdown.elementToBreakdown.get(element)?.typeToCount?.get(cardType)}}, 
+        </ng-container>)
+    </div>
+</div>

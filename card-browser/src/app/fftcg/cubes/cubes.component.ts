@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject, combineLatest, map } from 'rxjs';
 
 import { Cube } from './cube';
 import { CubesService } from './cubes.service';
+import { CubeCard } from './cube-card';
 
 @Component({
   selector: 'app-cubes',
@@ -35,6 +36,15 @@ export class CubesComponent implements OnInit{
 
   protected onClickCreateNew(): void {
     this.newCube$.next(new Cube(undefined, 'Untitled Cube', []));
+  }
+
+  protected onClickClone(): void {
+    if (this.myCube) {
+      this.newCube$.next(new Cube(
+        undefined,
+        `Copy of ${this.myCube.name}`,
+        this.myCube.cards.map(cubeCard => new CubeCard(cubeCard.setID, cubeCard.rank))));
+    }
   }
 
   ngOnInit(): void {
