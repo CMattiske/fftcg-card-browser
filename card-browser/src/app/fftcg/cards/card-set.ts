@@ -52,6 +52,7 @@ export class CardSets
         new CardSet("Opus XVII", "17", 17, 140, "Rebellion's Call"),
         new CardSet("Opus XVIII", "18", 18, 140, "Resurgence of Power"),
         new CardSet("Opus XIX", "19", 19, 138, "From Nightmares"),
+        new CardSet("Opus XX", "20", 20, 130, "Dawn of Heroes"),
     ];
 
     static OtherSets: CardSet[] = [
