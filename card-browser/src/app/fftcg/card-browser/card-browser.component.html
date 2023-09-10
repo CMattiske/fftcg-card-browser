@@ -16,7 +16,7 @@
             [jobOptions]="jobOptions$ | async | nullToEmpty"
             [setOptions]="setOptions$ | async | nullToEmpty"
             [tagOptions]="tagOptions$ | async | nullToEmpty"
-            (change)="onFiltersChanged($event)"></app-card-filter>
+            (filterChanged)="onFiltersChanged($event)"></app-card-filter>
     </div>
     <div>
         <h4>Displaying <b>{{(filteredCards$ | async | nullToEmpty).length}}</b> results</h4>

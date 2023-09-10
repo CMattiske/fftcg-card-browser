@@ -15,7 +15,7 @@ export class CardFilterComponent {
   @Input() setOptions: string[] = [];
   @Input() tagOptions: string[] = [];
 
-  @Output() change: EventEmitter<Filter[]> = new EventEmitter<Filter[]>();
+  @Output() filterChanged: EventEmitter<Filter[]> = new EventEmitter<Filter[]>();
 
   private myNameFilter: Filter | undefined;
   private myTypeFilter: Filter | undefined;
@@ -97,7 +97,7 @@ export class CardFilterComponent {
 
   private onFiltersChanged(): void
   {
-    this.change.emit([
+    const filters: Filter[] = [
       this.myNameFilter,
       this.myTypeFilter,
       this.myFlagsFilter,
@@ -109,6 +109,8 @@ export class CardFilterComponent {
       this.myPowerFilter,
       this.mySetFilter,
       this.myRarityFilter,
-    ].filter(Predicates.Defined));
+    ].filter(Predicates.Defined);
+
+    this.filterChanged.emit(filters);
   }
 }
