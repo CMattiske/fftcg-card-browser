@@ -1,6 +1,14 @@
-.container {
+.main-container {
     display: flex;
     flex-flow: column nowrap;
 
-    gap: 4px;
+    gap: 4px
+}
+
+.row-container {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+
+    gap: 8px;
 }

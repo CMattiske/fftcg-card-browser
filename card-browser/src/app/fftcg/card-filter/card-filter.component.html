@@ -1,43 +1,54 @@
-<div class="container">
-    <!-- Name -->
-    <div>
-        <app-filter-name (change)="onChangeName($event)"></app-filter-name>
+<div class="main-container">
+    <div class="row-container">
+        <!-- Name -->
+        <div>
+            <app-filter-name (change)="onChangeName($event)"></app-filter-name>
+        </div>
+        <!-- Cost -->
+        <div>
+            <app-filter-cost (change)="onChangeCost($event)"></app-filter-cost>
+        </div>
     </div>
-    <!-- Type & flags -->
-    <div>
-        <app-filter-type (change)="onChangeType($event)"></app-filter-type>
+    <div class="row-container">
+        <!-- Type -->
+        <div>
+            <app-filter-type (change)="onChangeType($event)"></app-filter-type>
+        </div>
+        <!-- Element -->
+        <div>
+            <app-filter-elements (change)="onChangeElements($event)"></app-filter-elements>
+        </div>
+    </div>
+    <div class="row-container">
+        <!-- Category -->
+        <div>
+            <app-filter-string-array property="category" [options]="categoryOptions" (change)="onChangeCategories($event)"></app-filter-string-array>
+        </div>
+        <!-- Job -->
+        <div>
+            <app-filter-string-array property="job" [options]="jobOptions" (change)="onChangeJobs($event)"></app-filter-string-array>
+        </div>
+        <!-- Power -->
+        <div>
+            <app-filter-power (change)="onChangePower($event)"></app-filter-power>
+        </div>
+    </div>
+    <div class="row-container">
+        <!-- Text -->
+        <div>
+            <app-filter-text (change)="onChangeText($event)"></app-filter-text>
+        </div>
+        <!-- Flags -->
         <app-filter-flags (change)="onChangeFlags($event)"></app-filter-flags>
     </div>
-    <!-- Element -->
-    <div>
-        <app-filter-elements (change)="onChangeElements($event)"></app-filter-elements>
-    </div>
-    <!-- Cost -->
-    <div>
-        <app-filter-cost (change)="onChangeCost($event)"></app-filter-cost>
-    </div>
-    <!-- Category -->
-    <div>
-        <app-filter-string-array property="category" [options]="categoryOptions" (change)="onChangeCategories($event)"></app-filter-string-array>
-    </div>
-    <!-- Job -->
-    <div>
-        <app-filter-string-array property="job" [options]="jobOptions" (change)="onChangeJobs($event)"></app-filter-string-array>
-    </div>
-    <!-- Text -->
-    <div>
-        <app-filter-text (change)="onChangeText($event)"></app-filter-text>
-    </div>
-    <!-- Power -->
-    <div>
-        <app-filter-power (change)="onChangePower($event)"></app-filter-power>
-    </div>
-    <!-- Set -->
-    <div>
-        <app-filter-string-array property="set" [options]="setOptions" (change)="onChangeSet($event)"></app-filter-string-array>
-    </div>
-    <!-- Rarity -->
-    <div>
-        <app-filter-rarity (change)="onChangeRarity($event)"></app-filter-rarity>
+    <div class="row-container">
+        <!-- Set -->
+        <div>
+            <app-filter-string-array property="set" [options]="setOptions" (change)="onChangeSet($event)"></app-filter-string-array>
+        </div>
+        <!-- Rarity -->
+        <div>
+            <app-filter-rarity (change)="onChangeRarity($event)"></app-filter-rarity>
+        </div>
     </div>
 </div>
