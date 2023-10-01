@@ -1,0 +1,19 @@
+.main-container {
+    display: flex;
+    flex-flow: row nowrap;
+    
+    gap: 16px;
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 16px;
+    grid-auto-rows: auto;
+
+    font-size: larger;
+}
+
+.image-container {
+
+}

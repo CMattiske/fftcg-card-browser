@@ -30,6 +30,7 @@ import { FilterRarityComponent } from './card-filter/filter-rarity/filter-rarity
 import { CubeEditorComponent } from './cube-editor/cube-editor.component';
 import { CubesComponent } from './cubes/cubes.component';
 import { CubeBreakdownComponent } from './cube-breakdown/cube-breakdown.component';
+import { CardDetailsComponent } from './card-details/card-details.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CubeBreakdownComponent } from './cube-breakdown/cube-breakdown.componen
     FilterRarityComponent,
     CubeEditorComponent,
     CubesComponent,
-    CubeBreakdownComponent
+    CubeBreakdownComponent,
+    CardDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,7 @@ import { CubeBreakdownComponent } from './cube-breakdown/cube-breakdown.componen
         component: CubesComponent,
         canDeactivate: [(component: CubesComponent) => component.pendingCubes.length === 0],
       },
-      // { path: 'cards/:id', component: CardDetailsComponent},
+      { path: 'cards/:id', component: CardDetailsComponent},
     ]),
 
     MatButtonModule,
