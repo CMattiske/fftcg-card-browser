@@ -3,7 +3,11 @@
         <span><b>Name</b></span><span>{{(card$ | async)?.name}}</span>
         <span><b>Elements</b></span>
         <span>
-            <img *ngFor="let element of (card$ | async)?.elements ?? []" [src]='elementImage(element)' />
+            <img
+                *ngFor="let element of (card$ | async)?.elements ?? []"
+                [src]='elementImage(element)'
+                height="32px"    
+            />
         </span>
         <span><b>Cost</b></span><span>{{(card$ | async)?.cost}}</span>
         <span><b>Type</b></span><span>{{(card$ | async)?.type}}</span>
@@ -15,8 +19,18 @@
         <span><b>Rarity</b></span><span>{{(card$ | async)?.rarity | displayRarity}}</span>
     </div>
     <div class="image-container">
-        <div fxFlexFill>
+        <div class="primary-image">
             <img *ngIf="!!(card$ | async)" [src]='cardImage(card$ | async)' [title]='(card$ | async)?.name'>
+        </div>
+        <div class="prev-image">
+            <img *ngIf="!!(nextCard$ | async)"
+                [src]='cardImage(nextCard$ | async)'
+                [title]='(nextCard$ | async)?.name'>
+        </div>
+        <div class="next-image">
+            <img *ngIf="!!(prevCard$ | async)"
+                [src]='cardImage(prevCard$ | async)'
+                [title]='(prevCard$ | async)?.name'>
         </div>
     </div>
 </div>

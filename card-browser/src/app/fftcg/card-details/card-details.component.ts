@@ -1,7 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Card } from '../cards/card';
 import { ImagesService } from '../images.service';
-import { Observable, map, combineLatest } from 'rxjs';
+import { Observable, map, combineLatest, switchMap, of } from 'rxjs';
 import { CardsService } from '../cards/cards.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CardElement } from '../cards/card-element';
@@ -13,7 +13,6 @@ import { CardElement } from '../cards/card-element';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardDetailsComponent implements OnInit {
-
   protected card$!: Observable<Card | undefined>;
 
   private setID$!: Observable<string | undefined>;
@@ -51,5 +50,15 @@ export class CardDetailsComponent implements OnInit {
   protected elementImage(element: CardElement): string
   {
     return this.imagesService.elementImage(element);
+  }
+
+  protected get nextCard$(): Observable<Card | undefined>
+  {
+    return this.card$.pipe(switchMap(card => card ? this.cardsService.nextCard$(card) : of(undefined)));
+  }
+
+  protected get prevCard$(): Observable<Card | undefined>
+  {
+    return this.card$.pipe(switchMap(card => card ? this.cardsService.prevCard$(card) : of(undefined)));
   }
 }

@@ -9,6 +9,7 @@ import { CardElement } from './card-element';
 import { CardSets } from './card-set';
 import { CardRarity } from './card-rarity';
 import { LoggingService } from 'src/app/logging.service';
+import { CardSorting } from './card-sorting';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,12 @@ export class CardsService {
     map((rawCards: ICard[]): Card[] => {
       return rawCards.map(CardsService.Card);
     }),
+    shareReplay(1),
+  );
+
+  sortedCards$: Observable<Card[]> = this.allCards$.pipe(
+    map(cards => cards.sort(CardSorting.BySetID)),
+    tap(cards => this.loggingService.log(`Sorted ${cards.length} cards`)),
     shareReplay(1),
   );
 
@@ -45,6 +52,32 @@ export class CardsService {
   );
 
   constructor(private loggingService: LoggingService, private backendService: BackendService) { }
+
+  nextCard$(currentCard: Card): Observable<Card | undefined>
+  {
+    return this.sortedCards$.pipe(
+      map(cards => {
+        const index = cards.findIndex(card => card.setID === currentCard.setID);
+        
+        if (index < 0) return undefined;
+        if (index === cards.length) return cards[0];
+
+        return cards[index + 1];
+      }));
+  }
+
+  prevCard$(currentCard: Card): Observable<Card | undefined>
+  {
+    return this.sortedCards$.pipe(
+      map(cards => {
+        const index = cards.findIndex(card => card.setID === currentCard.setID);
+        
+        if (index < 0) return undefined;
+        if (index === 0) return cards[cards.length - 1];
+        
+        return cards[index - 1];
+      }));
+  }
 
   static Categories(cards$: Observable<Card[]>): Observable<string[]> {
     return cards$.pipe(
