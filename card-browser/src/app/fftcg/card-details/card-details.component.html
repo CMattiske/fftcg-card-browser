@@ -7,12 +7,12 @@
         </span>
         <span><b>Cost</b></span><span>{{(card$ | async)?.cost}}</span>
         <span><b>Type</b></span><span>{{(card$ | async)?.type}}</span>
-        <span><b>Categories</b></span><span>{{(card$ | async)?.categories}}</span>
-        <span><b>Jobs</b></span><span>{{(card$ | async)?.jobs}}</span>
-        <span><b>Text</b></span><div>{{(card$ | async)?.text}}</div>
+        <span><b>Categories</b></span><span>{{(card$ | async)?.categories ?? [] | displayCategories}}</span>
+        <span><b>Jobs</b></span><span>{{(card$ | async)?.jobs ?? [] | displayJobs}}</span>
+        <span><b>Text</b></span><div style="white-space: pre;" [innerHTML]="(card$ | async)?.text ?? '' | cardText"></div>
         <span><b>Power</b></span><span>{{(card$ | async)?.power}}</span>
         <span><b>Set ID</b></span><span>{{(card$ | async)?.setID}}</span>
-        <span><b>Rarity</b></span><span>{{(card$ | async)?.rarity}}</span>
+        <span><b>Rarity</b></span><span>{{(card$ | async)?.rarity | displayRarity}}</span>
     </div>
     <div class="image-container">
         <div fxFlexFill>

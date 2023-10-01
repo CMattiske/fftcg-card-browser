@@ -31,6 +31,10 @@ import { CubeEditorComponent } from './cube-editor/cube-editor.component';
 import { CubesComponent } from './cubes/cubes.component';
 import { CubeBreakdownComponent } from './cube-breakdown/cube-breakdown.component';
 import { CardDetailsComponent } from './card-details/card-details.component';
+import { DisplayCategoriesPipe } from './pipes/display-categories.pipe';
+import { DisplayJobsPipe } from './pipes/display-jobs.pipe';
+import { DisplayRarityPipe } from './pipes/display-rarity.pipe';
+import { CardTextPipe } from './pipes/card-text.pipe';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,10 @@ import { CardDetailsComponent } from './card-details/card-details.component';
     CubesComponent,
     CubeBreakdownComponent,
     CardDetailsComponent,
+    DisplayCategoriesPipe,
+    DisplayJobsPipe,
+    DisplayRarityPipe,
+    CardTextPipe,
   ],
   imports: [
     CommonModule,
