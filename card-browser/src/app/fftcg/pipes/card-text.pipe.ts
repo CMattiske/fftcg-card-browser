@@ -29,9 +29,13 @@ export class CardTextPipe implements PipeTransform {
     .replace(/{w}/gm, `<img height="18px" src="${this.imagesService.costElement(CardElement.WIND)}"/>`)
     .replace(/{e}/gm, `<img height="18px" src="${this.imagesService.costElement(CardElement.EARTH)}"/>`)
     .replace(/{l}/gm, `<img height="18px" src="${this.imagesService.costElement(CardElement.LIGHTNING)}"/>`)
-    .replace(/{a}/gm, `<img height="18px" src="${this.imagesService.costElement(CardElement.WATER)}"/>`)
+    .replace(/{u}/gm, `<img height="18px" src="${this.imagesService.costElement(CardElement.WATER)}"/>`)
     // Other symbols
-    .replace(/{EX}/gm, `<img height="18px" src="${this.imagesService.exBurst()}"/>`);
+    .replace(/{EX}/gm, `<img height="18px" src="${this.imagesService.exBurst()}"/>`)
+    // Special ability names
+    .replace(/\[.*?\]/gm, (substring: string): string => {
+      return "<i><b><font color='#F58B11'>" + substring.substring(1, substring.length - 1) + "</i></b></font>";
+    });
   }
 
 }
