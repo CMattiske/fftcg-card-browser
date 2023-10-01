@@ -22,6 +22,6 @@
         <h4>Displaying <b>{{(filteredCards$ | async | nullToEmpty).length}}</b> results</h4>
     </div>
     <div>
-        <app-card-gallery [cards]="filteredCards$ | async | nullToEmpty"></app-card-gallery>
+        <app-card-gallery [cards]="filteredCards$ | async | nullToEmpty" (cardClick)="onCardClicked($event)"></app-card-gallery>
     </div>
 </div>

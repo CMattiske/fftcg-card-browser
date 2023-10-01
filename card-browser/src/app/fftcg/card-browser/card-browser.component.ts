@@ -6,6 +6,7 @@ import { Filter } from '../card-filter/filter';
 import { Card } from '../cards/card';
 import { CardsService } from '../cards/cards.service';
 import { CubesService } from '../cubes/cubes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-browser',
@@ -30,7 +31,10 @@ export class CardBrowserComponent implements OnInit {
 
   private nameToList: Map<string, Set<string> | undefined> = new Map<string, Set<string> | undefined>([["All", undefined]]);
 
-  constructor(private cardsService: CardsService, private cubesService: CubesService) {}
+  constructor(
+    private router: Router,
+    private cardsService: CardsService,
+    private cubesService: CubesService) {}
 
   protected get listName(): string {
     return this.myListName;
@@ -66,5 +70,10 @@ export class CardBrowserComponent implements OnInit {
   protected onFiltersChanged(filters: Filter[]): void
   {
     this.filters$.next(filters);
+  }
+
+  protected onCardClicked(card: Card): void
+  {
+    this.router.navigateByUrl(`/cards/${card.setID}`);
   }
 }
