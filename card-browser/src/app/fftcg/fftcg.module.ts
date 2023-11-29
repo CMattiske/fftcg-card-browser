@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { CardBrowserComponent } from './card-browser/card-browser.component';
 import { CardGalleryComponent } from './card-gallery/card-gallery.component';
@@ -35,6 +36,8 @@ import { DisplayCategoriesPipe } from './pipes/display-categories.pipe';
 import { DisplayJobsPipe } from './pipes/display-jobs.pipe';
 import { DisplayRarityPipe } from './pipes/display-rarity.pipe';
 import { CardTextPipe } from './pipes/card-text.pipe';
+import { DeckListEditorComponent } from './deck-list-editor/deck-list-editor.component';
+import { DecksComponent } from './deck-lists/decks.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,8 @@ import { CardTextPipe } from './pipes/card-text.pipe';
     DisplayJobsPipe,
     DisplayRarityPipe,
     CardTextPipe,
+    DeckListEditorComponent,
+    DecksComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +74,10 @@ import { CardTextPipe } from './pipes/card-text.pipe';
         path: 'cubes',
         component: CubesComponent,
         canDeactivate: [(component: CubesComponent) => component.pendingCubes.length === 0],
+      },
+      {
+        path: 'deckLists',
+        component: DecksComponent,
       },
       { path: 'cards/:id', component: CardDetailsComponent},
     ]),
@@ -82,6 +91,7 @@ import { CardTextPipe } from './pipes/card-text.pipe';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatSliderModule,
 
     SharedModule,
   ]

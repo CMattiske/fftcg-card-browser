@@ -1,0 +1,36 @@
+<div>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [(ngModel)]='name'/>
+    </mat-form-field>
+    <button mat-raised-button (click)="onClickSave()">Save</button>
+</div>
+<div class="top-container">
+    <div>
+        <app-card-filter
+            [categoryOptions]="categoryOptions$ | async | nullToEmpty"
+            [jobOptions]="jobOptions$ | async | nullToEmpty"
+            [setOptions]="setOptions$ | async | nullToEmpty"
+            [tagOptions]="tagOptions$ | async | nullToEmpty"
+            (filterChanged)="onFiltersChanged($event)"></app-card-filter>
+        <mat-form-field appearance="fill">
+            <mat-label>Sort by</mat-label>
+            <mat-select [(value)]="sortBy">
+                <mat-option value="id">ID</mat-option>
+                <mat-option value="element">Element</mat-option>
+                <mat-option value="type">Card type</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="all-container">
+        <app-card-gallery
+            [cards]='filteredAllCards$ | async | nullToEmpty'
+            [fadedCards]='fadedCards$ | async | nullToEmptySet'
+            (cardClick)="onAllCardClick($event)">
+        </app-card-gallery>
+    </div>
+</div>
+<!-- <app-card-gallery
+    [cards]='sortedDeckCards$ | async | nullToEmpty'
+    (cardClick)="onDeckListCardClick($event)">
+</app-card-gallery> -->

@@ -35,8 +35,8 @@ export class CubesService {
         return {
           setID: cubeCard.setID,
           rank: cubeCard.rank
-        } as ICubeCard;
+        };
       }),
-    } as ICube;
+    };
   }
 }

@@ -1,0 +1,14 @@
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Deck list</mat-label>
+        <mat-select [(value)]="deckList">
+            <mat-option *ngFor="let deckList of deckLists$ | async | nullToEmpty" [value]="deckList">
+            {{deckList.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button (click)="onClickCreateNew()">Create new</button>
+    <button mat-raised-button (click)="onClickClone()">Clone</button>
+</div>
+<mat-divider></mat-divider>
+<app-deck-list-editor [deckList]="deckList"></app-deck-list-editor>

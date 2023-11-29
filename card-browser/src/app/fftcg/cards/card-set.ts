@@ -26,6 +26,10 @@ export class CardSet
     get order(): number {
         return this.myOrder;
     }
+
+    get count(): number {
+        return this.myCount;
+    }
 }
 
 export class CardSets

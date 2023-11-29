@@ -1,8 +1,12 @@
+<mat-slider min="50" max="500" step="1">
+    <input matSliderThumb [(ngModel)]="widthSliderValue">
+</mat-slider>
 <div class="image-gallery">
     <ng-container *ngFor="let card of cards">
         <div fxFlexFill class="image-gallery-item" (click)="onClick(card)">
                 <img [src]='cardImage(card)'
                  [style]="isFaded(card) ? 'opacity: 0.2;' : ''"
+                 [ngStyle]="{'width': ((cardWidthCSS$ | async) ?? '215px')}"
                  [title]='card.name'>
         </div>
     </ng-container>

@@ -83775,5 +83775,12 @@
       ],
       "id": 6
     }
+  ],
+  "deckLists": [
+    {
+      "name": "New Deck",
+      "cards": [],
+      "id": 1
+    }
   ]
 }

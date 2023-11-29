@@ -1,5 +1,5 @@
 export interface ICube {
-    id: number,
+    id?: number,
 
     name: string,
 

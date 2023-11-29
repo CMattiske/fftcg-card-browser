@@ -33,7 +33,7 @@ export enum ERarity
 
 export interface ICard
 {
-    id: number,
+    id?: number,
 
     name: string,
     type: ECardType,
